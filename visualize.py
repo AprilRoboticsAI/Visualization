@@ -12,8 +12,7 @@ def select_episode(meta):
     for i in range(n):
         ep = meta.episodes[i]
         length = int(ep["length"])
-        task_idx = int(ep["task_index"]) if "task_index" in ep else None
-        task = meta.tasks.index[task_idx] if task_idx is not None else "?"
+        task = ep["tasks"][0]
         print(f"  [{i}] {length} frames  task={task!r}")
 
     while True:

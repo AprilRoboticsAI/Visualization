@@ -1,3 +1,5 @@
+import os
+
 import numpy as np
 import rerun as rr
 from scipy.spatial.transform import Rotation
@@ -50,8 +52,11 @@ def pose7_to_T(p):
 class SceneVisualizer:
     """Replay-only scene visualization (cameras + hand keypoints) using Rerun."""
 
-    def __init__(self, app_name="Dataset Replay", spawn=True):
-        rr.init(app_name, spawn=spawn)
+    def __init__(self, app_name="Dataset Replay", spawn=True, memory_limit="10%"):
+        os.environ.setdefault("RERUN_FLUSH_NUM_BYTES", "8000")
+        rr.init(app_name)
+        if spawn:
+            rr.spawn(memory_limit=memory_limit)
         rr.send_blueprint(
             rr.blueprint.Blueprint(
                 rr.blueprint.Horizontal(
@@ -100,7 +105,7 @@ class SceneVisualizer:
                 image_from_camera=K, resolution=[rw, rh], image_plane_distance=0.2
             ),
         )
-        rr.log("world/head_cam/image", rr.Image(image))
+        rr.log("world/head_cam/image", rr.Image(image).compress())
         rr.log("world/head_cam/axes", self._axes)
 
     def log_wrist_cam(self, T_world_wrist, image):
@@ -119,7 +124,7 @@ class SceneVisualizer:
                 image_plane_distance=0.2,
             ),
         )
-        rr.log("world/wrist_cam/image", rr.Image(image))
+        rr.log("world/wrist_cam/image", rr.Image(image).compress())
         rr.log("world/wrist_cam/axes", self._axes)
 
     def log_hand_keypoints(self, keypoints):
