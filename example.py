@@ -1,4 +1,3 @@
-import numpy as np
 from lerobot.datasets.lerobot_dataset import LeRobotDataset
 
 EPISODE_ID = 0
