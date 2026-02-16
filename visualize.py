@@ -50,10 +50,13 @@ def main():
             T_world_wrist = pose7_to_T(state[7:14])
             keypoints = state[14:].reshape(21, 3)
 
-            head_img = np.array(item["observation.images.head_cam"]).transpose(1, 2, 0)
-            wrist_img = np.array(item["observation.images.wrist_cam"]).transpose(
-                1, 2, 0
-            )
+            head_img = item["observation.images.head_cam"].permute(1, 2, 0).numpy()
+            wrist_img = item["observation.images.wrist_cam"].permute(1, 2, 0).numpy()
+
+            if head_img.dtype != np.uint8:
+                head_img = (head_img * 255).clip(0, 255).astype(np.uint8)
+            if wrist_img.dtype != np.uint8:
+                wrist_img = (wrist_img * 255).clip(0, 255).astype(np.uint8)
 
             vis.log_head_cam(T_world_cam, head_img)
             vis.log_wrist_cam(T_world_wrist, wrist_img)

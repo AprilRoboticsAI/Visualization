@@ -52,7 +52,7 @@ def pose7_to_T(p):
 class SceneVisualizer:
     """Replay-only scene visualization (cameras + hand keypoints) using Rerun."""
 
-    def __init__(self, app_name="Dataset Replay", spawn=True, memory_limit="10%"):
+    def __init__(self, app_name="Dataset Replay", spawn=True, memory_limit="50%"):
         os.environ.setdefault("RERUN_FLUSH_NUM_BYTES", "8000")
         rr.init(app_name)
         if spawn:
