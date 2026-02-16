@@ -34,4 +34,5 @@ You'll be prompted to select an episode. The script then replays it in Rerun, sh
 ## Files
 
 - `visualize.py` — dataset loading, episode selection, and replay loop
+- `example.py` — basic data loading example
 - `scene_visualizer.py` — `SceneVisualizer` class and transform utilities
