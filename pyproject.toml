@@ -1,0 +1,21 @@
+[project]
+name = "glove-visualization"
+version = "0.1.0"
+description = "Visualize recorded GloveSDK datasets using Rerun"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.20",
+    "scipy>=1.7",
+    "rerun-sdk>=0.18",
+    "lerobot>=0.4.0",
+]
+
+[project.scripts]
+visualize = "visualize:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
