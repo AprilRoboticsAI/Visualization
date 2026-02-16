@@ -22,7 +22,7 @@ uv sync
 ## Usage
 
 ```bash
-python visualize.py
+uv run visualize.py
 ```
 
 You'll be prompted to select an episode. The script then replays it in Rerun, showing:
