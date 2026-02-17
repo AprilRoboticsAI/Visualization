@@ -29,9 +29,11 @@ REPO_ID = "aprilrobotics/sample"
 
 
 def main():
+    print(f"Loading metadata for {REPO_ID}...")
     meta = LeRobotDatasetMetadata(repo_id=REPO_ID)
     episode = select_episode(meta)
 
+    print(f"Loading episode {episode}...")
     dataset = LeRobotDataset(repo_id=REPO_ID, episodes=[episode])
     fps = meta.fps
     print(f"Loaded {len(dataset)} frames at {fps} FPS (episode {episode})")
